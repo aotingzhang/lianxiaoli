@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>理小办 · 校园办事智能体 | 大连理工大学「连小理」</title>
+<meta name="description" content="理小办不是让 AI 替学生搜索信息，而是让 AI 理解学生的目标，帮学生从「不知道怎么办」走到「知道下一步做什么」。">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ============ 顶栏 ============ -->
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#home">
+      <span class="brand-mark">理</span>
+      <span class="brand-text">
+        <b>理小办</b>
+        <i>校园办事智能体 · 原型站点</i>
+      </span>
+    </a>
+    <nav class="nav">
+      <a href="#demo">智能体演示</a>
+      <a href="#arch">三段接力</a>
+      <a href="#reuse">场景迁移</a>
+      <a href="#impact">应用效果</a>
+      <a href="#about">关于与合规</a>
+    </nav>
+    <a class="btn btn-sm btn-primary topbar-cta" href="#demo">试着问一句</a>
+  </div>
+</header>
+
+<!-- ============ Hero ============ -->
+<section class="hero" id="home">
+  <div class="wrap hero-inner">
+    <div class="hero-left">
+      <div class="tag-row">
+        <span class="tag tag-blue">赛道一 · 智能体创意应用</span>
+        <span class="tag">大连理工大学「连小理」新生智能体应用与设计大赛</span>
+      </div>
+      <h1 class="hero-title">
+        不是让 AI 替学生<br>
+        <span class="hl">搜索信息</span>，<br>
+        而是帮学生走到<br>
+        <span class="hl2">「知道下一步做什么」</span>
+      </h1>
+      <p class="hero-sub">
+        学校的规定本身是齐全的，问题在于它们分散在不同文件、不同栏目、还有校区差异。
+        学生不缺信息，缺的是信息的<strong>顺序</strong>与<strong>落点</strong>。
+      </p>
+      <div class="hero-agents">
+        <span class="chip chip-a">① 信息智能体 · 查得准</span>
+        <span class="chip chip-b">② 规划智能体 · 排得顺</span>
+        <span class="chip chip-c">③ 执行助手 · 做得成</span>
+        <span class="chip chip-d">🧠 理小办 · 统一收口</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#demo">打开智能体演示</a>
+        <a class="btn btn-ghost" href="#arch">看它怎么工作</a>
+      </div>
+      <p class="hero-note">本站为<strong>可运行的功能原型</strong>：所有答案由站点内置的规则引擎在真实依据库上推演得出，未调用大模型，也不生成推测内容。</p>
+    </div>
+    <div class="hero-right">
+      <div class="phone">
+        <div class="phone-bar"><span></span><span class="phone-title">理小办 · 办事卡</span></div>
+        <div class="phone-body">
+          <div class="pmsg pmsg-user">我的校园卡丢了怎么办</div>
+          <div class="pcard">
+            <div class="pcard-hd">
+              <span class="pcard-badge">已生成</span>
+              <span class="pcard-title">校园卡丢失补办 · 办事卡</span>
+            </div>
+            <div class="pcard-concl">
+              <label>结论先行</label>
+              先在手机上自助挂失止损，再到自助设备或服务大厅补办新卡，工本费 25 元/次。
+            </div>
+            <ol class="pcard-steps">
+              <li><b>1</b> 立即挂失<i>i大工 APP → 玉兰卡 → 卡片挂失</i></li>
+              <li><b>2</b> 补办新卡<i>自助补卡机 / 大工 e 站，25 元/次</i></li>
+              <li><b>3</b> 找回原卡则解挂<i>初始密码须到服务大厅</i></li>
+            </ol>
+            <div class="pcard-foot">
+              依据：《大连理工大学学生证件管理办法》· 一卡通服务指南
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 核心：可用的智能体演示 ============ -->
+<section class="section" id="demo">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-kicker">核心演示</span>
+      <h2>用日常的话问一句，看三段接力怎么跑完</h2>
+      <p>下面这一段是<strong>真的能跑</strong>的。选择你的校区，像发微信一样提问，三段输出会依次生成，最后由理小办收口成一张办事卡。</p>
+    </div>
+
+    <div class="demo">
+      <!-- 左：输入 -->
+      <aside class="demo-side">
+        <div class="panel">
+          <div class="panel-hd"><h3>① 发起提问</h3></div>
+          <div class="panel-bd">
+            <label class="lbl">你在哪个校区<span>（决定「地点」这一栏的答案）</span></label>
+            <div class="seg" id="campusSeg">
+              <button class="seg-btn is-on" data-campus="凌水校区">凌水</button>
+              <button class="seg-btn" data-campus="开发区校区">开发区</button>
+              <button class="seg-btn" data-campus="盘锦校区">盘锦</button>
+            </div>
+
+            <label class="lbl" for="qInput">你想问什么<span>（怎么说都行，不用写成规范标题）</span></label>
+            <textarea id="qInput" rows="4" placeholder="例：我的校园卡丢了怎么办／宿舍空调不制冷找谁／屋里突然没电了"></textarea>
+
+            <button class="btn btn-primary btn-block" id="runBtn">
+              <span id="runBtnText">生成办事卡</span>
+            </button>
+            <p class="tiny">支持 Enter 运行（Ctrl/⌘+Enter 换行）</p>
+
+            <div class="ask-samples">
+              <label class="lbl">学生实际会这么说<i id="whyReal"></i></label>
+              <div class="chips" id="sampleChips"></div>
+            </div>
+
+            <div class="hist" id="histWrap" hidden>
+              <label class="lbl">最近提问</label>
+              <ul class="hist-list" id="histList"></ul>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 右：流水线 + 卡片 -->
+      <main class="demo-main">
+        <div class="pipeline" id="pipeline"></div>
+        <div id="cardWrap"></div>
+      </main>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 三段接力架构 ============ -->
+<section class="section alt-bg" id="arch">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-kicker">创意思路</span>
+      <h2>为什么是「三段接力」，而不是一个什么都会的机器人</h2>
+      <p>关键不在能力大小，而在<strong>职责边界</strong>。单一智能体既查又排又填，容易产出无依据的臆测和自相矛盾的步骤；分离之后，每一环都能单独校准，也便于横向复用。</p>
+    </div>
+
+    <div class="flowline">
+      <div class="fnode"><span class="fdott-blue">提问</span><small>学生用日常语言发问</small></div>
+      <div class="farrow"></div>
+      <div class="fnode fnode-a"><span class="fdot fdott-blue">①</span><small>信息智能体<br>查得准</small></div>
+      <div class="farrow"></div>
+      <div class="fnode fnode-b"><span class="fdot fdott-violet">②</span><small>规划智能体<br>排得顺</small></div>
+      <div class="farrow"></div>
+      <div class="fnode fnode-c"><span class="fdot fdott-green">③</span><small>执行助手<br>做得成</small></div>
+      <div class="farrow"></div>
+      <div class="fnode fnode-d"><span class="fdot fdott-amber">🧠</span><small>理小办<br>统一收口</small></div>
+    </div>
+
+    <div class="agent-grid">
+      <article class="agent-card agent-a">
+        <header><span class="ano">①</span><h3>信息智能体</h3><em>查得准</em></header>
+        <dl>
+          <dt>唯一职责</dt><dd>在指定检索域内定位条款，输出带出处的原始事实片段</dd>
+          <dt>交付物</dt><dd>「事实 + 出处 + 适用校区 + 更新时间」的清单</dd>
+          <dt>明确不做</dt><dd class="no">不下结论、不给建议、不臆测；检索域按场景收窄，不混入无关规章</dd>
+        </dl>
+      </article>
+      <article class="agent-card agent-b">
+        <header><span class="ano">②</span><h3>规划智能体</h3><em>排得顺</em></header>
+        <dl>
+          <dt>唯一职责</dt><dd>基于事实判断先后依赖与条件分支，拆成可逐条执行的步骤</dd>
+          <dt>交付物</dt><dd>有序步骤序列，分支显式写出</dd>
+          <dt>明确不做</dt><dd class="no">不查原始规定、不填地点材料、不修改事实结论</dd>
+        </dl>
+      </article>
+      <article class="agent-card agent-c">
+        <header><span class="ano">③</span><h3>执行助手</h3><em>做得成</em></header>
+        <dl>
+          <dt>唯一职责</dt><dd>为每一步补齐「入口 / 地点 / 材料 / 注意事项」四要素</dd>
+          <dt>交付物</dt><dd>每步四个字段全部落地，缺一项学生就可能白跑一趟</dd>
+          <dt>明确不做</dt><dd class="no">不重排步骤、不改结论、不自行判断分支</dd>
+        </dl>
+      </article>
+    </div>
+
+    <div class="callout callout-amber">
+      <b>唯一答案原则。</b>三路结果由「理小办」统一收口成一张办事卡，遵循<strong>结论先行 · 步骤可执行 · 依据可追溯</strong>——只给一个答案，不给三个让学生自己拼的答案。
+    </div>
+
+    <div class="qualfail">
+      <h3>四要素的合格 / 不合格对照</h3>
+      <table class="qtable">
+        <thead><tr><th>要素</th><th>合格</th><th>不合格</th></tr></thead>
+        <tbody>
+          <tr><td><b>入口</b></td><td class="ok">i大工 APP → 玉兰卡 → 卡片挂失</td><td class="bad">登录校园门户自行查找</td></tr>
+          <tr><td><b>地点</b></td><td class="ok">凌水：网信中心一楼服务大厅（东门），周一至周五 08:00–15:00</td><td class="bad">校园卡服务大厅（不说校区差异）</td></tr>
+          <tr><td><b>材料</b></td><td class="ok">本人身份证原件，需本人到场</td><td class="bad">相关证件</td></tr>
+          <tr><td><b>注意</b></td><td class="ok">补卡 25 元/次；初始密码未改不可自助解挂，须到服务大厅</td><td class="bad">注意保管好证件</td></tr>
+        </tbody>
+      </table>
+      <p class="tiny">缺入口 → 不知道从哪进；缺地点 → 跑错校区；缺材料 → 到了窗口被退回；缺注意 → 以为能自助，到了才发现必须本人到场。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 场景迁移 ============ -->
+<section class="section" id="reuse">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-kicker">复用性</span>
+      <h2>换三样东西，换一个场景</h2>
+      <p>架构与输出格式<strong>完全不变</strong>，迁移到新场景只替换三处配置。这也是「理小办」真正的价值：一套<strong>校务智能体生产方法</strong>，规则只维护一处。</p>
+    </div>
+
+    <div class="three-step">
+      <article class="tstep">
+        <span class="tno">换</span><h3>检索域</h3>
+        <p>把信息智能体的知识范围从「学生证件」换成「住宿与后勤维修」等对应规章。</p>
+        <small>坑：检索域必须按<strong>校区</strong>与<strong>问题类型</strong>切分，不切分就会给出跑错校区的答案。</small>
+      </article>
+      <article class="tstep">
+        <span class="tno">换</span><h3>执行字段</h3>
+        <p>四要素模板不变，只替换入口、地点、材料、注意事项的取值。</p>
+        <small>坑：同一句「坏了」可能对应 4 个不同渠道，<strong>必须先分诊再给入口</strong>。</small>
+      </article>
+      <article class="tstep">
+        <span class="tno">换</span><h3>真实问法</h3>
+        <p>用学生实际会说的话作触发语料，覆盖同义、模糊、情绪化表达。</p>
+        <small>坑：学生不会说「设施设备报修申请」，只会说「寝室东西坏了」。语料里没有这些说法，智能体就永远接不到真实提问。</small>
+      </article>
+    </div>
+
+    <h3 class="sub-h3">场景迁移矩阵（站点当前已配置）</h3>
+    <div class="scene-matrix" id="sceneMatrix"></div>
+
+    <h3 class="sub-h3">未核实项清单：这类字段我们宁可留空</h3>
+    <p class="sec-p">下方清单来自各场景配置里的 <code>待核实</code> 项。按数据纪律，<strong>未核实的字段不得凭推测填入办事卡</strong>，所以它们在卡片里会显式显示为【待核实】。</p>
+    <div class="open-items" id="openItems"></div>
+  </div>
+</section>
+
+<!-- ============ 应用效果 ============ -->
+<section class="section alt-bg" id="impact">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-kicker">应用效果</span>
+      <h2>把规则只维护一处</h2>
+    </div>
+
+    <div class="before-after">
+      <div class="ba ba-before">
+        <span class="ba-label">过去</span>
+        <h3>自己拼凑路径</h3>
+        <p>翻公众号推文、找学院通知、问同学 → 自己猜顺序 → 跑一趟窗口 → 漏带材料或走错网点 → 二次往返</p>
+      </div>
+      <div class="ba-arrow">→</div>
+      <div class="ba ba-after">
+        <span class="ba-label">现在</span>
+        <h3>直接照做</h3>
+        <p>一句话提问 → 拿到包含入口、地点、材料、注意事项的办事卡 → 材料备齐一次办成，并可就任一步继续追问</p>
+      </div>
+    </div>
+
+    <div class="impact-grid">
+      <article><b>对学生</b><span>路径由「自己拼凑」变为「直接照做」，拿卡即可动身</span></article>
+      <article><b>对部门</b><span>不必反复解释同一件事，规则变更只需维护一处</span></article>
+      <article><b>对学校</b><span>形成可复用的「校务智能体」生产方法，新场景三步配置即可上线</span></article>
+    </div>
+
+    <div class="metrics">
+      <div class="metric"><span class="mv">【待填】</span><span class="mk">平均获取时长（分钟）</span></div>
+      <div class="metric"><span class="mv">【待填】</span><span class="mk">平均跑腿次数</span></div>
+      <div class="metric"><span class="mv">【待填】</span><span class="mk">一次问清率</span></div>
+      <div class="metric"><span class="mv">4</span><span class="mk">已覆盖场景数</span></div>
+    </div>
+    <p class="tiny metric-note">实测数据将在实跑回收问卷后填入，<strong>未测不填估算值</strong>。已覆盖场景数为站点当前实际配置的场景数，属可直接核对的事实。</p>
+  </div>
+</section>
+
+<!-- ============ 关于与合规 ============ -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-kicker">关于</span>
+      <h2>数据来源与合规声明</h2>
+    </div>
+    <div class="about-grid">
+      <article class="about-card">
+        <h3>这是一个原型站点</h3>
+        <p>界面为可运行的<strong>功能原型</strong>，标注为原型线框风格，<strong>不伪造真实截图或真实对话记录</strong>。演示中的答复由内置规则引擎在下方依据库上推演，不代表学校官方口径。</p>
+      </article>
+      <article class="about-card">
+        <h3>依据可追溯</h3>
+        <p>每条事实都带出处。办事卡底部会列出全部依据文件，并对处于草稿状态的场景显式标注<strong>【待核实】</strong>，未核实字段一律留白，不以推测填补。</p>
+      </article>
+      <article class="about-card">
+        <h3>不虚构效果</h3>
+        <p>未实测的效果数据一律保留<strong>【待填】</strong>占位；引用的规定名称、地点、费用、时限需在上线前核对至最新版本。</p>
+      </article>
+      <article class="about-card">
+        <h3>检索域有边界</h3>
+        <p>遇到检索域外的问题，智能体会<strong>明确回答「未覆盖」</strong>并给出可选方向，而不是生成一个看起来合理的答案。这是「信息智能体」职责边界的直接体现。</p>
+      </article>
+    </div>
+    <div class="callout callout-blue" id="sourceList">
+      <h3>当前引用依据清单</h3>
+      <div id="srcAll"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div>
+      <b>理小办</b> · 校园办事智能体
+      <span class="dim">大连理工大学「连小理」新生智能体应用与设计大赛 · 赛道一</span>
+    </div>
+    <div class="dim">参赛团队【待填写】 · 指导教师【待填写】 · 成员【待填写】</div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/engine.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
